@@ -1,0 +1,407 @@
+% Question no. 01
+
+sum(A,B,S):-
+	S is A+B.
+
+% Question no. 02
+
+max2no(X,Y,R):-
+	X>=Y,
+	R=x.
+max2no(X,Y,R):-
+	Z=Y.
+
+% Question no. 03
+fact(0,1).
+fact(N,F):-
+	N>0,
+	N1 is N-1,
+	fact(N1,R),
+	F is N*R.
+
+% Question no. 04
+
+fibo(1,0).
+fibo(2,1).
+fibo(N,F):-
+	N>2,
+	N1 is N-1,
+	N2 is N-2,
+	fibo(N1,F1),
+	fibo(N2,F2),
+	F is F1+F2.
+
+
+% Question no. 05
+
+gcd(0, X, X):- 
+	X > 0, !.
+gcd(X, Y, R):- 
+	X >= Y, X1 is X-Y, gcd(X1,Y,R).
+gcd(X, Y, R):- 
+	X < Y, X1 is Y-X, gcd(X1,X,R).
+
+
+
+% Question no. 06
+power(_,0,1).
+power(X,Y,Z):-
+	Y1 is Y-1,
+	power(X,Y1,Z1),
+	Z is X*Z1.
+
+% Question no. 07
+
+multi(N1,N2,R):-
+	R is N1*N2.
+
+% Question no. 08
+	
+memb(X,[X|T]).
+memb(X,[H|T]):-
+	memb(X,T).
+
+
+% Question no. 09
+
+conc([],L,L).
+conc([X|L1],L2,[X|L3]):-
+	conc(L1,L2,L3).
+
+% Question no. 10
+
+reverse([],[]).
+reverse([X|L1],L2):-
+	reverse(L1,L3),
+	conc(L3,[X],L2).
+
+% Question no. 11
+
+palindrome(L):-
+	reverse(L,L).
+
+% Question no. 12
+
+sumlist([],0).
+sumlist([X|L1],S):-
+	sumlist(L1,S1),
+	S is S1+X.
+
+% Question no. 13
+
+evenlength([]).
+evenlength([_|T]):-
+	oddlength(T).
+oddlength([_|T]):-
+	evenlength(T).
+
+% Question no. 14
+
+nth_element(1, [X|_], X).
+nth_element(K,[_|L],X):-
+	nth_element(K1,L,X),
+	K is K1+1.
+
+% Question no. 15
+
+maxlist([X],X).
+maxlist([H|T],M):- 
+	maxlist(T,M1), 
+	H<M1 -> M is M1;
+	M is H.
+
+% Question no. 16
+
+insert_nth(I, 1, L, [I|L]).
+insert_nth(I, N, [H|T], [H|R]):- 
+	N1 is N-1,
+	insert_nth(I, N1, T, R).
+
+
+% Question no. 17
+
+delete_nth(1, [_|T], T).
+delete_nth(N, [H|T], [H|R]):- 
+	N1 is N-1,
+	delete_nth(N1, T, R).
+
+
+% Question no. 18
+
+merge([],L2,L2).
+merge(L1,[],L1).
+merge([H1|T1],[H2|T2],[H1|T3]):- 
+	H1=<H2,
+	merge(T1, [H2|T2], T3).
+merge([H1|T1],[H2|T2],[H2|T3]):- 
+	merge([H1|T1], T2, T3).
+
+
+input 
+
+% Question no. 01
+
+sum:-
+	write("Enter First number: "),
+	read(X),
+	write("Enter Second number: "),
+	read(Y),
+	Z is X+Y,
+	write("Sum is "),write(Z).
+
+% Question no. 02
+
+max:-
+	write("Enter First number: "),
+	read(X),
+	write("Enter Second number: "),
+	read(Y),
+	(  X =< Y
+    	-> Z = Y
+    	;  Z = X
+     	),write("Maximum number is: "),write(Z).
+
+% Question no. 03
+
+factorial(0,1).
+factorial(N,F) :-
+    N > 0,
+    N1 is N-1,
+    factorial(N1,Result1),
+    F is Result1*N.
+factorial:-
+	write("Enter number to find factorial: "),
+	read(X),
+	factorial(X,F),
+	write("The factorial of "),write(X),
+	write(" is: "),write(F).
+
+
+% Question no. 04
+
+generate_fib(1,0).
+generate_fib(2,1).
+generate_fib(N,T):-
+	N1 is N-1,
+	generate_fib(N1,T1),
+	N2 is N-2,
+	generate_fib(N2,T2),
+	T is T1+T2.
+fibonacci:-
+	write("Enter the fibonacci term you want: "),
+	read(X),
+	generate_fib(X,F),
+	write("The number at "),write(X),
+	write(" in fibonacci series is: "),write(F).
+
+% Question no. 05
+
+gcd(0, X, X):- 
+	X > 0, !.
+gcd(X, Y, R):- 
+	X >= Y, X1 is X-Y, gcd(X1,Y,R).
+gcd(X, Y, R):- 
+	X < Y, X1 is Y-X, gcd(X1,X,R).
+gcd:-
+	write("Enter first number: "),
+	read(X),
+	write("Enter second number: "),
+	read(Y),
+	gcd(X,Y,F),
+	write("GCD of "),write(X),write(" and "),
+	write(Y),write(" is: "),write(F).
+	
+% Question no. 06
+
+power(_,0,1).
+power(X,Y,Z):-
+	Y1 is Y-1,
+	power(X,Y1,Z1),
+	Z is X*Z1.
+power:-
+	write("Enter the base: "),
+	read(X),
+	write("Enter the exponent: "),
+	read(Y),
+	power(X,Y,F),
+	write("The result of "),write(X),
+	write(" to the power "),write(Y),
+	write(" is: "),write(F).
+
+
+% Question no. 07
+
+multi:-
+	write("Enter first Number: "),
+	read(X),
+	write("Enter second Number: "),
+	read(Y),
+	R is X*Y,
+	write("Product of "),write(X),
+	write(" and "),write(Y),
+	write(" is: "),write(R).
+
+
+% Question no. 08
+
+memb(X,[X|T]).
+memb(X,[H|T]):-
+	memb(X,T).
+member:-
+	write("Enter the List: "),
+	read(L),
+	write("Enter the number to be found: "),
+	read(X),
+	write(X),
+	(memb(X,L)->
+	write(" is the member of the given list")
+	;write(" is not the member of the given list")).
+
+
+% Question no. 09
+
+conc([],L,L).
+conc([X|L1],L2,[X|L3]):-
+	conc(L1,L2,L3).
+concatenate:-
+	write("Enter First List: "),
+	read(L1),
+	write("Enter Second List: "),
+	read(L2),
+	conc(L1,L2,L3),
+	write("The concatenated list is: "),
+	write(L3).
+
+
+% Question no. 10
+
+reverse([],[]).
+reverse([X|L1],L2):-
+	reverse(L1,L3),
+	conc(L3,[X],L2).
+reverse:-
+	write("Enter the list to be reversed: "),
+	read(L1),
+	reverse(L1,L2),
+	write("Reversed list is: "),
+	write(L2).
+
+% Question no. 11
+
+palindrome:-
+	write("Enter the list to check palindrome: "),
+	read(L),
+	(reverse(L,L)->
+	write("The entered list is palindrome");
+	write("The entered list is not palindrome")).
+
+% Question no. 12
+
+sumlist([],0).
+sumlist([X|L1],S):-
+	sumlist(L1,S1),
+	S is S1+X.
+sumlist:-
+	write("Enter the list for sum up: "),
+	read(L),
+	sumlist(L,S),
+	write("The sum of each element of list is: "),
+	write(S).
+
+% Question no. 13
+
+evenlength([]).
+evenlength([_|T]):-
+	oddlength(T).
+oddlength([_|T]):-
+	evenlength(T).
+evenoddlength:-
+	write("Enter the list to be checked: "),
+	read(L),
+	(evenlength(L)
+	->write("The entered list is even length");
+	write("The entered list is odd length")).
+
+
+% Question no. 14
+
+nth_element(1, [X|_], X).
+nth_element(K,[_|L],X):-
+	nth_element(K1,L,X),
+	K is K1+1.
+nth_element:-
+	write("Enter the list: "),
+	read(L),
+	write("Enter the position of the element"),
+	read(N),
+	nth_element(N,L,X),
+	write("The element at position "),
+	write(N),write(" in the list is: "),
+	write(X).
+
+% Question no. 15
+
+maxlist([X],X).
+maxlist([H|T],M):- 
+	maxlist(T,M1), 
+	H<M1 -> M is M1;
+	M is H.
+maxlist:-
+	write("Enter the list: "),
+	read(L),
+	maxlist(L,X),
+	write("The maximum element in the given list is: "),
+	write(X),!.
+
+% Question no. 16
+
+insert_nth(I, 1, L, [I|L]).
+insert_nth(I, N, [H|T], [H|R]):- 
+	N1 is N-1,
+	insert_nth(I, N1, T, R).
+insert_nth:-
+	write("Enter the list: "),
+	read(L),
+	write("Enter the position of the element to be inserted: "),
+	read(N),
+	write("Enter the element to be inserted: "),
+	read(I),
+	insert_nth(I,N,L,R),
+	write("Final list after insertion of "),
+	write(I),write(" at "),
+	write(N),write(" position in the list is: "),
+	write(R).
+
+% Question no. 17
+
+delete_nth(1, [_|T], T).
+delete_nth(N, [H|T], [H|R]):- 
+	N1 is N-1,
+	delete_nth(N1, T, R).
+delete_nth:-
+	write("Enter the list: "),
+	read(L),
+	write("Enter the position of the element to be deleted: "),
+	read(N),
+	delete_nth(N,L,R),
+	write("Final list after deletion of element at "),
+	write(N),write(" position in the list is: "),
+	write(R).
+
+% Question no. 18
+
+merge([],L2,L2).
+merge(L1,[],L1).
+merge([H1|T1],[H2|T2],[H1|T3]):- 
+	H1=<H2,
+	merge(T1, [H2|T2], T3).
+merge([H1|T1],[H2|T2],[H2|T3]):- 
+	merge([H1|T1], T2, T3).
+merge:-
+	write("Enter the first ordered list: "),
+	read(L1),
+	write("Enter the second ordered list: "),
+	read(L2),
+	merge(L1,L2,L3),
+	write("The final list after merging given two ordered list: "),
+	write(L3).
