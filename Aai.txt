@@ -196,12 +196,10 @@ fibonacci:-
 
 % Question no. 05
 
-gcd(0, X, X):- 
-	X > 0, !.
-gcd(X, Y, R):- 
-	X >= Y, X1 is X-Y, gcd(X1,Y,R).
-gcd(X, Y, R):- 
-	X < Y, X1 is Y-X, gcd(X1,X,R).
+gcd(X,0,X).
+gcd(X,Y,Z):-
+	R is mod(X,Y),
+	gcd(Y,R,Z).
 gcd:-
 	write("Enter first number: "),
 	read(X),
@@ -325,10 +323,10 @@ evenoddlength:-
 
 % Question no. 14
 
-nth_element(1, [X|_], X).
-nth_element(K,[_|L],X):-
-	nth_element(K1,L,X),
-	K is K1+1.
+nth_element(1,[X|T],X).
+nth_element(N,[H|T],X):-
+	N1 is N-1;
+	nth_element(N1,T,X).
 nth_element:-
 	write("Enter the list: "),
 	read(L),
